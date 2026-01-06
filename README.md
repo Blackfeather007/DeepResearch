@@ -5,7 +5,7 @@
 ## 功能特性
 
 - ✅ 从 `conjectures.json` 读取猜想（仅使用 `informal_statement` 字段）
-- ✅ 使用 `prompt.txt` 模板构建完整的调研提示
+- ✅ 使用可配置的 prompt 模板文件构建完整的调研提示
 - ✅ 并发处理多个猜想（可配置并发数）
 - ✅ 错误重试机制（最多3次，指数退避）
 - ✅ 实时进度追踪
@@ -28,6 +28,7 @@ input_file: "data/conjectures.json"              # 输入文件路径
 output_file: "data/conjecture_deepresearch.json" # 输出文件路径
 max_retries: 3                                    # 最大重试次数
 concurrency: 5                                    # 并发数
+prompt_path: "prompts/prompt_erdos.txt"          # Prompt 模板文件路径（可选，默认为 prompts/prompt_algebra.txt）
 ```
 
 ## 使用方法
@@ -54,15 +55,19 @@ python scripts/deepresearch_batch.py
 
 1. **API 密钥**：请确保在 `config.yaml` 中设置了正确的 OpenAI API 密钥
 2. **API 限制**：注意 OpenAI API 的速率限制，适当调整 `concurrency` 参数
-3. **超时设置**：每个请求的超时时间为 5 分钟，如需调整可修改代码中的 `timeout` 参数
+3. **超时设置**：每个请求的超时时间为 1 小时，如需调整可修改代码中的 `timeout` 参数
 4. **错误处理**：如果某个猜想处理失败，会在结果中标记 `error` 字段，但不会中断整个处理流程
+5. **Prompt 模板**：可以在 `config.yaml` 中通过 `prompt_path` 配置项指定不同的 prompt 模板文件，支持多个 prompt 文件切换使用
 
 ## 文件结构
 
 ```
 .
 ├── config.yaml                          # 配置文件
-├── prompt.txt                           # Prompt 模板
+├── prompts/                             # Prompt 模板目录
+│   ├── prompt_algebra.txt              # 默认 Prompt 模板（代数）
+│   ├── prompt_erdos.txt                # Erdos 相关 Prompt 模板
+│   └── ...                             # 其他 Prompt 模板
 ├── requirements.txt                     # Python 依赖
 ├── scripts/
 │   └── deepresearch_batch.py           # 主脚本
