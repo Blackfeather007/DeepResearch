@@ -1,0 +1,14 @@
+api_url: ""
+api_key: ""
+
+# 文件路径配置
+input_file: "data/formalized_conjecture.json"
+output_file: "data/formalized_conjecture_deepresearch.json"
+
+# 处理配置
+max_retries: 3
+concurrency: 5
+
+# Prompt 模板文件路径（可选，默认为 prompts/prompt_algebra.txt）
+prompt_path: "prompts/prompt_erdos.txt"
+

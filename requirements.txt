@@ -1,0 +1,14 @@
+# OpenAI DeepResearch API 批量处理依赖包
+
+# OpenAI 官方 SDK
+openai>=1.0.0
+
+# 配置文件解析
+pyyaml>=6.0
+
+# 进度条显示
+tqdm>=4.66.0
+
+# 异步文件操作（可选，如果需要异步文件读写）
+# aiofiles>=23.0.0
+
